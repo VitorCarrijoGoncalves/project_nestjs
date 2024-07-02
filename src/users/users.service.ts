@@ -10,4 +10,6 @@ export class UsersService {
             password: '12345678'
         }
     ]
+
+    create(newUser: UserDto)
 }
