@@ -19,3 +19,23 @@
  <p>nest generate module nome_do_modulo</p>
  <p>nest generate service nome_do_service</p>
 
+ #Comando para executar a aplicação com DevTools:
+
+ <p>npm run start:debug</p>
+
+ # Instalando o BCrypt:
+
+ <p>npm install bcrypt</p>
+
+ # Dependência de desenvolvimento do bcrypt
+
+ <p>npm install -D @types/bcrypt</p>
+
+ # Biblioteca para gerar os UUID
+
+ <p>npm install uuid</p>
+
+ # Dependência de desenvolvimento
+
+ <p>npm install -D @types/uuid</p>
+
