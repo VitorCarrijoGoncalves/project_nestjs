@@ -16,8 +16,9 @@
 
 # Comandos para criação de módulo, controller e services para uma aplicação nest.js:
 
- <p>nest generate module nome_do_modulo</p>
- <p>nest generate service nome_do_service</p>
+<p>nest generate module nome_do_modulo</p>
+<p>nest generate service nome_do_service</p>
+<p>nest generate controller nome_do_controller</p>
 
 # Comando para executar a aplicação com DevTools:
 
