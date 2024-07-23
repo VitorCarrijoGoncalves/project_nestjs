@@ -2,16 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { UserDto } from './user.dto';
 import { v4 as uuid } from 'uuid';
 import { hashSync as bcryptHashSync } from 'bcrypt';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UserEntity } from 'src/db/entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-    private readonly users: UserDto[] = [
-        {
-            id: '1',
-            username: 'user',
-            password: '12345678'
-        }
-    ]
+
+    constructor(
+        @InjectRepository(UserEntity)
+        private readonly usersRepository: Repository<UserEntity>
+    ) { }
+
+    private readonly users: UserDto[] = []
 
     create(newUser: UserDto) {
         newUser.id = uuid();
@@ -19,7 +22,19 @@ export class UsersService {
         this.users.push(newUser)
     }
 
-    findByUserName(username: string): UserDto | null {
-        return this.users.find(user => user.username === username);
+    async findByUserName(username: string): Promise<UserDto | null> {
+        const userFound = await this.usersRepository.findOne({
+            where: { username }
+        })
+
+        if (!userFound) {
+            null;
+        }
+
+        return {
+            id: userFound.id,
+            username: userFound.username,
+            password: userFound.passwordHash
+        }
     }
 }
