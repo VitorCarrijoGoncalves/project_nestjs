@@ -23,9 +23,13 @@ export class UsersService {
                 throw new ConflictException(`User '${newUser.username}' already registered.`)
         }
 
-        const dbUser
+        const dbUser = new UserEntity();
+        dbUser.username = newUser.username;
+        dbUser.passwordHash = bcryptHashSync(newUser.password, 10)
 
-        const {id, username} = await this.usersRepository.save();
+        const { id, username } = await this.usersRepository.save(dbUser);
+
+        return { id, username }
     }
 
 
@@ -36,7 +40,7 @@ export class UsersService {
         })
 
         if (!userFound) {
-            null;
+            return null;
         }
 
         return {
